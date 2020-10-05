@@ -32,6 +32,7 @@ typedef struct {
   TokenType tokenType;
   int value;
 } Token;
+Token data_token[1000];
 
 TokenType checkKeyword(char *string);
 Token* makeToken(TokenType tokenType, int lineNo, int colNo);

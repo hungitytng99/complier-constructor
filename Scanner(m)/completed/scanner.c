@@ -18,12 +18,13 @@ extern int colNo;
 extern int currentChar;
 
 extern CharCode charCodes[];
+Token data_token[1000];
 
 /***************************************************************/
 
 void skipBlank()
 {
-  while (charCodes[currentChar] == CHAR_SPACE)
+  while (charCodes[currentChar] == CHAR_SPACE && currentChar != EOF)
   {
     readChar();
   }
@@ -449,14 +450,16 @@ int scan(char *fileName)
   if (openInputStream(fileName) == IO_ERROR)
     return IO_ERROR;
 
+  int i = 0;
   token = getToken();
   while (token->tokenType != TK_EOF)
   {
     printToken(token);
+    data_token[i] = *token;
+    i++;
     free(token);
     token = getToken();
   }
-
   free(token);
   closeInputStream();
   return IO_SUCCESS;
