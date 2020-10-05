@@ -195,10 +195,18 @@ Token *getToken(void)
     readChar();
     return token;
 
-  case CHAR_PERIOD:
-    token = makeToken(SB_PERIOD, lineNo, colNo);
+  case CHAR_PERIOD: // . .)
+    ln =lineNo;
+    cn = colNo;
     readChar();
-    return token;
+    if(charCodes[currentChar] == CHAR_RPAR && currentChar != EOF)
+    {
+        readChar();
+        return makeToken(SB_RSEL, ln, cn);
+    }
+    else{
+      return  makeToken(SB_PERIOD, lineNo, colNo);
+    }
 
   case CHAR_EQ:
     token = makeToken(SB_EQ, lineNo, colNo);

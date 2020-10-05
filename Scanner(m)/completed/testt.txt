@@ -14,4 +14,3 @@ Begin
       Call WriteI( F(i));
     End;
 End. (* Factorial *)
-(.a.)
